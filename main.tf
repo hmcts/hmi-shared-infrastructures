@@ -14,6 +14,11 @@ resource "azurerm_resource_group" "rg" {
   tags     = var.common_tags
 }
 
+data "azurerm_user_assigned_identity" "hmi-identity" {
+ name                = "${var.product}-${var.env}-mi"
+ resource_group_name = "managed-identities-${var.env}-rg"
+}
+
 #tfsec:ignore:azure-storage-default-action-deny
 module "sa" {
   source = "git@github.com:hmcts/cnp-module-storage-account?ref=master"
@@ -39,4 +44,6 @@ module "sa" {
   team_contact = var.team_contact
 
   containers = local.containers
+
+  managed_identity_object_id = data.azurerm_user_assigned_identity.hmi-identity.principal_id
 }
