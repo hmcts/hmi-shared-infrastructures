@@ -8,10 +8,9 @@ locals {
   resource_group_name  = "${local.prefix}-${var.env}-rg"
 }
 
-resource "azurerm_resource_group" "rg" {
+# Needs to be a resource when current repo is deleted.
+data "azurerm_resource_group" "rg" {
   name     = local.resource_group_name
-  location = var.location
-  tags     = var.common_tags
 }
 
 data "azurerm_user_assigned_identity" "hmi-identity" {
