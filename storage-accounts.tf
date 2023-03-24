@@ -4,7 +4,6 @@ locals {
     access_type = "private"
   }]
   storage_account_name = "${var.product}sa${var.env}"
-  resource_group_name  = "${local.prefix}-${var.env}-rg"
 }
 
 data "azurerm_user_assigned_identity" "hmi-identity" {
