@@ -29,7 +29,7 @@ module "sa" {
 
   default_action = "Allow"
 
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   location            = var.location
 
   account_tier                    = var.sa_account_tier
