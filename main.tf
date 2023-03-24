@@ -1,9 +1,17 @@
 locals {
+  prefix = "${var.product}-sharedinfra"
   containers = [{
     name        = "rota"
     access_type = "private"
   }]
   storage_account_name = "${var.product}sa${var.env}"
+  resource_group_name  = "${local.prefix}-${var.env}-rg"
+}
+
+resource "azurerm_resource_group" "rg" {
+  name     = local.resource_group_name
+  location = var.location
+  tags     = var.common_tags
 }
 
 #tfsec:ignore:azure-storage-default-action-deny
