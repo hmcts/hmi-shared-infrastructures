@@ -1,5 +1,4 @@
 locals {
-  prefix = "${var.product}-sharedinfra"
   containers = [{
     name        = "rota"
     access_type = "private"
