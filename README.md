@@ -1,0 +1,1 @@
+# hmi-shared-infrastructures
