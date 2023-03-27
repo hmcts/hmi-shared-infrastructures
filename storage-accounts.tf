@@ -6,9 +6,9 @@ locals {
   storage_account_name = "${var.product}sa${var.env}"
 }
 
-data "azurerm_user_assigned_identity" "hmi-identity" {
- name                = "${var.product}-${var.env}-mi"
- resource_group_name = "managed-identities-${var.env}-rg"
+data "azurerm_user_assigned_identity" "keda" {
+  name                = "keda-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
 }
 
 #tfsec:ignore:azure-storage-default-action-deny
@@ -37,8 +37,8 @@ module "sa" {
 
   containers = local.containers
 
-  managed_identity_object_id = data.azurerm_user_assigned_identity.hmi-identity.principal_id
+  managed_identity_object_id = data.azurerm_user_assigned_identity.keda.principal_id
   role_assignments = [
-    "Storage Blob Data Contributor"
+    "Azure Service Bus Data Receiver"
   ]
 }
