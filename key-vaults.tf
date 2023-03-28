@@ -23,7 +23,7 @@ module "keyvault_secrets" {
   secrets = [
     {
       name            = "sa-connection-string"
-      value           = module.kv_hmi.storageaccount_primary_connection_string
+      value           = module.sa.storageaccount_primary_connection_string
       tags            = {}
       content_type    = ""
       expiration_date = local.secret_expiry
