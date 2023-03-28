@@ -39,6 +39,6 @@ module "sa" {
 
   managed_identity_object_id = data.azurerm_user_assigned_identity.keda.principal_id
   role_assignments = [
-    "Azure Service Bus Data Receiver"
+    "Storage Blob Data Reader"
   ]
 }
