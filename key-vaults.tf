@@ -1,5 +1,5 @@
 locals {
-  key_vault_name = "${local.prefix}-kv-${var.env}"
+  key_vault_name = "${local.product}-kv-${var.env}"
 }
 
 module "kv_hmi" {
