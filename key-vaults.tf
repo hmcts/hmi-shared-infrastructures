@@ -3,6 +3,13 @@ locals {
   secret_expiry = "2024-03-01T01:00:00Z"
 }
 
+data "azurerm_subnet" "jenkins_subnet" {
+  provider             = azurerm.mgmt
+  name                 = "iaas"
+  virtual_network_name = var.env == "sbox" ? "ss-ptlsbox-vnet" : "ss-ptl-vnet"
+  resource_group_name  = var.env == "sbox" ? "ss-ptlsbox-network-rg" : "ss-ptl-network-rg"
+}
+
 module "kv_hmi" {
   source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
   name                    = local.key_vault_name
@@ -13,6 +20,9 @@ module "kv_hmi" {
   product_group_name      = var.active_directory_group
   common_tags             = var.common_tags
   create_managed_identity = false
+  network_acls_allowed_subnet_ids = [data.azurerm_subnet.jenkins_subnet.id] 
+  network_acls_allowed_ip_ranges = ["IPs"]
+  network_acls_default_action = "Deny"
 }
 
 resource "azurerm_key_vault_access_policy" "cft_jenkins_access" {
