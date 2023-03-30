@@ -3,18 +3,18 @@ locals {
   secret_expiry = "2024-03-01T01:00:00Z"
 }
 
-resource "azurerm_key_vault_access_policy" "cft_jenkins_access" {
-  key_vault_id = module.kv_hmi.key_vault_id
+# resource "azurerm_key_vault_access_policy" "cft_jenkins_access" {
+#   key_vault_id = module.kv_hmi.key_vault_id
 
-  object_id = "ca6d5085-485a-417d-8480-c3cefa29df31"
-  tenant_id = data.azurerm_client_config.current.tenant_id
+#   object_id = "ca6d5085-485a-417d-8480-c3cefa29df31"
+#   tenant_id = data.azurerm_client_config.current.tenant_id
 
-  certificate_permissions = []
-  key_permissions         = []
-  secret_permissions = [
-    "Get",
-  ]
-}
+#   certificate_permissions = []
+#   key_permissions         = []
+#   secret_permissions = [
+#     "Get",
+#   ]
+# }
 
 module "kv_hmi" {
   source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
