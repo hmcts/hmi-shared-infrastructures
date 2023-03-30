@@ -28,22 +28,22 @@ resource "azurerm_key_vault_access_policy" "cft_jenkins_access" {
   ]
 }
 
-# module "keyvault_secrets" {
-#   source = "./modules/kv_secrets"
+module "keyvault_secrets" {
+  source = "./modules/kv_secrets"
 
-#   key_vault_id = module.kv_hmi.key_vault_id
-#   tags         = var.common_tags
-#   secrets = [
-#     {
-#       name            = "sa-connection-string"
-#       value           = module.sa.storageaccount_primary_connection_string
-#       tags            = {}
-#       content_type    = ""
-#       expiration_date = local.secret_expiry
-#     }
-#   ]
+  key_vault_id = module.kv_hmi.key_vault_id
+  tags         = var.common_tags
+  secrets = [
+    {
+      name            = "sa-connection-string"
+      value           = module.sa.storageaccount_primary_connection_string
+      tags            = {}
+      content_type    = ""
+      expiration_date = local.secret_expiry
+    }
+  ]
 
-#   depends_on = [
-#     module.kv_hmi
-#   ]
-# }
+  depends_on = [
+    module.kv_hmi
+  ]
+}
