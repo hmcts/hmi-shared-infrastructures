@@ -1,6 +1,15 @@
 locals {
   key_vault_name = "${var.product}-kv-${var.env}"
   secret_expiry = "2024-03-01T01:00:00Z"
+  secrets = [
+    {
+      name            = "sa-connection-string"
+      value           = module.sa.storageaccount_primary_connection_string
+      tags            = {}
+      content_type    = ""
+      expiration_date = local.secret_expiry
+    }
+  ]
 }
 
 module "kv_hmi" {
@@ -16,20 +25,14 @@ module "kv_hmi" {
   managed_identity_object_ids = [data.azurerm_user_assigned_identity.hmi.principal_id]
 }
 
-module "keyvault_secrets" {
-  source = "./modules/kv_secrets"
-
+module "kv_secrets" {
   key_vault_id = module.kv_hmi.key_vault_id
-  tags         = var.common_tags
-  secrets = [
-    {
-      name            = "sa-connection-string"
-      value           = module.sa.storageaccount_primary_connection_string
-      tags            = {}
-      content_type    = ""
-      expiration_date = local.secret_expiry
-    }
-  ]
+  for_each        = { for secret in local.secrets : secret.name => secret }
+  name            = each.value.name
+  value           = each.value.value
+  tags            = merge(var.common_tags, each.value.tags)
+  content_type    = each.value.content_type
+  expiration_date = each.value.expiration_date
 
   depends_on = [
     module.kv_hmi
