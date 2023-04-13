@@ -1,3 +1,6 @@
 # hmi-shared-infrastructures
 
-new hmi infrastructure repo for the dtu re-write.
+This repository contains the shared common infrastructure per environment for HMI.
+
+- Azure Key Vault
+- Azure Storage Account
