@@ -1,8 +1,14 @@
 locals {
-  containers = [{
-    name        = "rota"
-    access_type = "private"
-  }]
+  containers = [
+    {
+      name        = "rota"
+      access_type = "private"
+    },
+    {
+      name        = "processing"
+      access_type = "private"
+    }
+  ]
   storage_account_name = "${var.product}sa${var.env}"
 }
 
