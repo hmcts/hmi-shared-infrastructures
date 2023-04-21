@@ -28,6 +28,15 @@ module "keyvault_secrets" {
       tags            = {}
       content_type    = ""
       expiration_date = local.secret_expiry
+    },
+    {
+      name  = "app-insights-rota-dtu-instrumentation-key"
+      value = azurerm_application_insights.rota_dtu_app_insights.instrumentation_key
+      tags = {
+        "source" = "App Insights"
+      }
+      content_type    = ""
+      expiration_date = local.secret_expiry
     }
   ]
 
