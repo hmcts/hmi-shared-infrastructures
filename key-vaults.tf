@@ -30,8 +30,8 @@ module "keyvault_secrets" {
       expiration_date = local.secret_expiry
     },
     {
-      name  = "app-insights-rota-dtu-instrumentation-key"
-      value = azurerm_application_insights.rota_dtu_app_insights.instrumentation_key
+      name  = "app-insights-rota-dtu-connection-string"
+      value = azurerm_application_insights.rota_dtu_app_insights.connection_string
       tags = {
         "source" = "App Insights"
       }
