@@ -1,6 +1,8 @@
 locals {
   key_vault_name = "${var.product}-kv-${var.env}"
   secret_expiry = "2024-03-01T01:00:00Z"
+  bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-rota-dtu-id", "hmi-rota-dtu-pwd"]
+  bootstrap_prefix = "${var.product}-bootstrap"
 }
 
 module "kv_hmi" {
@@ -40,6 +42,38 @@ module "keyvault_secrets" {
     }
   ]
 
+  depends_on = [
+    module.kv_hmi
+  ]
+}
+
+data "azurerm_key_vault" "bootstrap_kv" {
+  name                = "${local.bootstrap_prefix}-kv-${var.env}"
+  resource_group_name = "${local.bootstrap_prefix}-${var.env}-rg"
+}
+
+data "azurerm_key_vault_secret" "bootstrap_secrets" {
+  for_each     = { for secret in local.bootstrap_secrets : secret => secret }
+  name         = each.value
+  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
+}
+
+module "keyvault_bootstrap_secrets" {
+  source = "./modules/kv_secrets"
+
+  key_vault_id = module.kv_hmi.key_vault_id
+  tags         = var.common_tags
+  secrets = [
+    for secret in data.azurerm_key_vault_secret.bootstrap_secrets : {
+      name  = secret.name
+      value = secret.value
+      tags = {
+        "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
+      }
+      content_type    = ""
+      expiration_date = local.secret_expiry
+    }
+  ]
   depends_on = [
     module.kv_hmi
   ]
