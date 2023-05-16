@@ -61,7 +61,7 @@ data "azurerm_key_vault_secret" "bootstrap_secrets" {
 module "keyvault_bootstrap_secrets" {
   source = "./modules/kv_secrets"
 
-  key_vault_id = module.kv.key_vault_id
+  key_vault_id = module.kv_hmi.key_vault_id
   tags         = var.common_tags
   secrets = [
     for secret in data.azurerm_key_vault_secret.bootstrap_secrets : {
