@@ -23,6 +23,8 @@ module "sa" {
 
   env = var.env
 
+  enable_change_feed = true
+
   storage_account_name = local.storage_account_name
   common_tags          = var.common_tags
 
