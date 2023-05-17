@@ -4,3 +4,4 @@ This repository contains the shared common infrastructure per environment for HM
 
 - Azure Key Vault
 - Azure Storage Account
+- Azure Application Insights
