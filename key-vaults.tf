@@ -39,6 +39,15 @@ module "keyvault_secrets" {
       }
       content_type    = ""
       expiration_date = local.secret_expiry
+    },
+    {
+      name  = "app-insights-libra-dtu-connection-string"
+      value = azurerm_application_insights.libra_dtu_app_insights.connection_string
+      tags = {
+        "source" = "App Insights"
+      }
+      content_type    = ""
+      expiration_date = local.secret_expiry
     }
   ]
 
