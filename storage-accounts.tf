@@ -7,6 +7,10 @@ locals {
     {
       name        = "processing"
       access_type = "private"
+    },
+    {
+      name        = "libra"
+      access_type = "private"
     }
   ]
   storage_account_name = "${var.product}sa${var.env}"
