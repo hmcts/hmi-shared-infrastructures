@@ -1,7 +1,7 @@
 locals {
   key_vault_name = "${var.product}-kv-${var.env}"
   secret_expiry = "2024-03-01T01:00:00Z"
-  bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-rota-dtu-id", "hmi-rota-dtu-pwd"]
+  bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-rota-dtu-id", "hmi-rota-dtu-pwd", "sn-assignment-group", "sn-caller-id", "sn-password", "sn-role-type", "sn-service-offering", "sn-url", "sn-username"]
   bootstrap_prefix = "${var.product}-bootstrap"
 }
 
