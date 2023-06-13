@@ -7,14 +7,16 @@ locals {
       permissions     = "rl"
       storage_account = "${var.product}sa${var.env}"
       container       = "rota"
-      expiry_days     = 180
+      expiry_days     = 240
+      remaining_days = 60
     }
 
     "rota-rlw" = {
       permissions     = "rlw"
       storage_account = "${var.product}sa${var.env}"
       container       = "rota"
-      expiry_days     = 180
+      expiry_days     = 240
+      remaining_days = 60
     }
   }
 }
