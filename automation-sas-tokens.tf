@@ -16,7 +16,6 @@ module "automation_runbook_sas_token_renewal" {
   automation_account_name          = azurerm_automation_account.automation_account.name
   sas_permissions                  = each.value.permissions
 
-  bypass_kv_networking             = true
   user_assigned_identity_client_id = data.azurerm_user_assigned_identity.hmi.principal_id
 
   tags = var.common_tags
