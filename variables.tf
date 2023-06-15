@@ -40,7 +40,10 @@ variable "jenkins_identity_object_id" {
   description = "Objectid for jenkins managed identity"
   default     = "7ef3b6ce-3974-41ab-8512-c3ef4bb8ae01"
 }
-
+variable "jenkins_mi_resource_id" {
+  type        = string
+  description = "Jenkins Managed Identity Resource ID"
+}
 variable "automation_account_sku_name" {
   type        = string
   description = "Azure Automation Account SKU name."
