@@ -28,7 +28,6 @@ module "kv_rota" {
   product_group_name          = var.active_directory_group
   common_tags                 = var.common_tags
   create_managed_identity     = false
-  managed_identity_object_ids = [data.azurerm_user_assigned_identity.hmi.principal_id]
 }
 
 module "keyvault_secrets" {
