@@ -36,5 +36,5 @@ data "azurerm_user_assigned_identity" "hmi" {
 resource "azurerm_role_assignment" "mi_sa" {
   scope                = module.sa.storageaccount_id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.hmi.principal_id
+  principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id
 }
