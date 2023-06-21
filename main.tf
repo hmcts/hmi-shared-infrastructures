@@ -32,3 +32,9 @@ data "azurerm_user_assigned_identity" "hmi" {
   name                = "hmi-${var.env}-mi"
   resource_group_name = "managed-identities-${var.env}-rg"
 }
+
+resource "azurerm_role_assignment" "mi_sa" {
+  scope                = module.sa.storageaccount_id
+  role_definition_name = "Contributor"
+  principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id
+}

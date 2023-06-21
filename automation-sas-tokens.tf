@@ -12,6 +12,7 @@ module "automation_runbook_sas_token_renewal" {
   key_vault_name                   = module.kv_rota.key_vault_name
   secret_name                      = "rota-sas-${each.value.container}-${each.value.permissions}"
   expiry_days                      = each.value.expiry_days
+  remaining_days                   = each.value.remaining_days
 
   automation_account_name          = azurerm_automation_account.automation_account.name
   sas_permissions                  = each.value.permissions
