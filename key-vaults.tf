@@ -44,6 +44,13 @@ module "keyvault_secrets" {
       expiration_date = local.secret_expiry
     },
     {
+      name            = "sa-name"
+      value           = module.sa.storageaccount_name
+      tags            = {}
+      content_type    = ""
+      expiration_date = local.secret_expiry
+    },
+    {
       name  = "app-insights-rota-dtu-connection-string"
       value = azurerm_application_insights.rota_dtu_app_insights.connection_string
       tags = {
