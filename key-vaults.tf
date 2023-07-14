@@ -67,14 +67,14 @@ module "keyvault_secrets" {
       }
       content_type    = ""
       expiration_date = local.secret_expiry
-    }
+    },
     {
       name            = "mi-id"
       value           = data.azurerm_user_assigned_identity.hmi.principal_id
       tags            = {}
       content_type    = ""
       expiration_date = local.secret_expiry
-    },
+    }
   ]
 
   depends_on = [
