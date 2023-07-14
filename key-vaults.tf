@@ -70,7 +70,7 @@ module "keyvault_secrets" {
     },
     {
       name            = "mi-id"
-      value           = data.azurerm_user_assigned_identity.hmi.id
+      value           = data.azurerm_user_assigned_identity.hmi.client_id
       tags            = {}
       content_type    = ""
       expiration_date = local.secret_expiry
