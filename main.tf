@@ -34,7 +34,8 @@ data "azurerm_user_assigned_identity" "hmi" {
 }
 
 resource "azurerm_role_assignment" "mi_sa" {
+  for_each     = toset( ["Contributor", "Storage Blob Data Contributor"] )
   scope                = module.sa.storageaccount_id
-  role_definition_name = "Contributor"
+  role_definition_name = each.key
   principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id
 }
