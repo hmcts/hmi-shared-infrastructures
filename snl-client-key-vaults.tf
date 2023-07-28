@@ -1,12 +1,12 @@
 locals {
   snl_bootstrap_secrets = ["hmi-snl-client-id", "hmi-snl-client-pwd"]
-  key_vault_name = "${var.product}-kv-${var.env}"
+  snl_key_vault_name = "${var.product}-kv-${var.env}-shared-snl"
 }
 
 # KV for SNL to access secrets needed to authenticate with HMI 
 module "kv_snl" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = "${local.key_vault_name}-shared-snl"
+  name                        = local.snl_key_vault_name
   product                     = var.product
   env                         = var.env
   object_id                   = var.jenkins_identity_object_id

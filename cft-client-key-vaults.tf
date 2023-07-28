@@ -1,12 +1,12 @@
 locals {
   cft_bootstrap_secrets = ["hmi-cft-client-id", "hmi-cft-client-pwd"]
-  key_vault_name = "${var.product}-kv-${var.env}"
+  cft_key_vault_name = "${var.product}-kv-${var.env}-shared-cft"
 }
 
 # KV for CFT to access secrets needed to authenticate with HMI 
 module "kv_cft" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = "${local.key_vault_name}-shared-cft"
+  name                        = local.cft_key_vault_name
   product                     = var.product
   env                         = var.env
   object_id                   = var.jenkins_identity_object_id

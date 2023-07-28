@@ -1,12 +1,12 @@
 locals {
   crime_bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
-  key_vault_name = "${var.product}-kv-${var.env}"
+  crime_key_vault_name = "${var.product}-kv-${var.env}-shared-crime"
 }
 
 # KV for Crime to access secrets needed to authenticate with HMI 
 module "kv_crime" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = "${local.key_vault_name}-shared-crime"
+  name                        = local.crime_key_vault_name
   product                     = var.product
   env                         = var.env
   object_id                   = var.jenkins_identity_object_id
