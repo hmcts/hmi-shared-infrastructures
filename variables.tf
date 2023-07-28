@@ -54,8 +54,14 @@ variable "automation_account_sku_name" {
   }
 }
 
-variable key_vault_name {
+variable "key_vault_name" {
   type        = string
   default     =  "${var.product}-kv-${var.env}"
   description = "The name of the key vault"
+}
+
+variable "secret_expiry" {
+  type        = string
+  default     =  "2024-03-01T01:00:00Z"
+  description = "The expiry date of the secrets"
 }
