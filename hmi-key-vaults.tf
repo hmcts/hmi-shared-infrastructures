@@ -1,5 +1,5 @@
 locals {
-  bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-dtu-id", 
+  hmi_bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-dtu-id", 
   "hmi-dtu-pwd", "sn-assignment-group", "sn-caller-id", "sn-password", "sn-role-type", 
   "sn-service-offering", "sn-url", "sn-username", "vh-client-id", "vh-client-pwd", 
   "snl-client-id", "snl-client-pwd", "pip-client-id", "pip-client-pwd", "pip-client-scope", "cft-client-id", 
@@ -7,7 +7,6 @@ locals {
   "elinks-client-token", "pip-client-host", "vh-client-host", "vh-OAuth-url", "hmi-servicenow-host", 
   "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host", 
   "crime-client-host", "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx", "cft-OAuth-url"]
-  secret_expiry = "2024-03-01T01:00:00Z"
   key_vault_name = "${var.product}-kv-${var.env}"
 }
 
@@ -35,14 +34,14 @@ module "keyvault_secrets" {
       value           = module.sa.storageaccount_primary_connection_string
       tags            = {}
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     },
     {
       name            = "sa-name"
       value           = module.sa.storageaccount_name
       tags            = {}
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     },
     {
       name  = "app-insights-rota-dtu-connection-string"
@@ -51,7 +50,7 @@ module "keyvault_secrets" {
         "source" = "App Insights"
       }
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     },
     {
       name  = "app-insights-libra-dtu-connection-string"
@@ -60,14 +59,14 @@ module "keyvault_secrets" {
         "source" = "App Insights"
       }
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     },
     {
       name            = "mi-id"
       value           = data.azurerm_user_assigned_identity.hmi.client_id
       tags            = {}
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     }
   ]
 
@@ -77,7 +76,7 @@ module "keyvault_secrets" {
 }
 
 data "azurerm_key_vault_secret" "hmi_bootstrap_secrets" {
-  for_each     = { for secret in local.bootstrap_secrets : secret => secret }
+  for_each     = { for secret in local.hmi_bootstrap_secrets : secret => secret }
   name         = each.value
   key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
 }
@@ -95,7 +94,7 @@ module "hmi_keyvault_bootstrap_secrets" {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     }
   ]
   depends_on = [

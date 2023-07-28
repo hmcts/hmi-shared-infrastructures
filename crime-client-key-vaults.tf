@@ -1,6 +1,5 @@
 locals {
-  bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
-  secret_expiry = "2024-03-01T01:00:00Z"
+  crime_bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
   key_vault_name = "${var.product}-kv-${var.env}"
 }
 
@@ -18,7 +17,7 @@ module "kv_crime" {
 }
 
 data "azurerm_key_vault_secret" "crime_bootstrap_secrets" {
-  for_each     = { for secret in local.bootstrap_secrets : secret => secret }
+  for_each     = { for secret in local.crime_bootstrap_secrets : secret => secret }
   name         = each.value
   key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
 }
@@ -36,7 +35,7 @@ module "crime_keyvault_bootstrap_secrets" {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     }
   ]
   depends_on = [

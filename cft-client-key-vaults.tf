@@ -1,6 +1,5 @@
 locals {
-  bootstrap_secrets = ["hmi-cft-client-id", "hmi-cft-client-pwd"]
-  secret_expiry = "2024-03-01T01:00:00Z"
+  cft_bootstrap_secrets = ["hmi-cft-client-id", "hmi-cft-client-pwd"]
   key_vault_name = "${var.product}-kv-${var.env}"
 }
 
@@ -18,7 +17,7 @@ module "kv_cft" {
 }
 
 data "azurerm_key_vault_secret" "cft_bootstrap_secrets" {
-  for_each     = { for secret in local.bootstrap_secrets : secret => secret }
+  for_each     = { for secret in local.cft_bootstrap_secrets : secret => secret }
   name         = each.value
   key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
 }
@@ -36,7 +35,7 @@ module "cft_keyvault_bootstrap_secrets" {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
       content_type    = ""
-      expiration_date = local.secret_expiry
+      expiration_date = var.secret_expiry
     }
   ]
   depends_on = [
