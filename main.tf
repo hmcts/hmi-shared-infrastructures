@@ -1,6 +1,7 @@
 locals {
   prefix = "${var.product}-sharedinfra"
   resource_group_name  = "${local.prefix}-${var.env}-rg"
+  bootstrap_prefix = "${var.product}-bootstrap"
 
   sas_tokens = {
     "rota-rl" = {
@@ -38,4 +39,9 @@ resource "azurerm_role_assignment" "mi_sa" {
   scope                = module.sa.storageaccount_id
   role_definition_name = each.key
   principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id
+}
+
+data "azurerm_key_vault" "bootstrap_kv" {
+  name                = "${local.bootstrap_prefix}-kv-${var.env}"
+  resource_group_name = "${local.bootstrap_prefix}-${var.env}-rg"
 }
