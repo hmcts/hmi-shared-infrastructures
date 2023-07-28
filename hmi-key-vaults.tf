@@ -8,11 +8,12 @@ locals {
   "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host", 
   "crime-client-host", "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx", "cft-OAuth-url"]
   secret_expiry = "2024-03-01T01:00:00Z"
+  key_vault_name = "${var.product}-kv-${var.env}"
 }
 
 module "kv_hmi" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = var.key_vault_name
+  name                        = local.key_vault_name
   product                     = var.product
   env                         = var.env
   object_id                   = var.jenkins_identity_object_id

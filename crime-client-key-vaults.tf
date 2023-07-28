@@ -1,12 +1,13 @@
 locals {
   bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
   secret_expiry = "2024-03-01T01:00:00Z"
+  key_vault_name = "${var.product}-kv-${var.env}"
 }
 
 # KV for Crime to access secrets needed to authenticate with HMI 
 module "kv_crime" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = "${var.key_vault_name}-shared-crime"
+  name                        = "${local.key_vault_name}-shared-crime"
   product                     = var.product
   env                         = var.env
   object_id                   = var.jenkins_identity_object_id

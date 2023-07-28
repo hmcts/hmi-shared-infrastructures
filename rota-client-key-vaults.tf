@@ -1,7 +1,11 @@
+locals {
+  key_vault_name = "${var.product}-kv-${var.env}"
+}
+
 # KV for rota to access secrets needed to authenticate with HMI
 module "kv_rota" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = "${var.key_vault_name}-shared-rota"
+  name                        = "${local.key_vault_name}-shared-rota"
   product                     = var.product
   env                         = var.env
   object_id                   = var.jenkins_identity_object_id
