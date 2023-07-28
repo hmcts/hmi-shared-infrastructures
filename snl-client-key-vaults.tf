@@ -1,5 +1,6 @@
 locals {
   bootstrap_secrets = ["hmi-snl-client-id", "hmi-snl-client-pwd"]
+  secret_expiry = "2024-03-01T01:00:00Z"
 }
 
 # KV for SNL to access secrets needed to authenticate with HMI 
@@ -34,7 +35,7 @@ module "snl_keyvault_bootstrap_secrets" {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
       content_type    = ""
-      expiration_date = var.secret_expiry
+      expiration_date = local.secret_expiry
     }
   ]
   depends_on = [
