@@ -53,3 +53,9 @@ variable "automation_account_sku_name" {
     error_message = "Azure Automation Account SKUs are limited to Basic."
   }
 }
+
+variable "secret_expiry" {
+  type        = string
+  description = "Secret expiry date"
+  default     = "2024-03-01T01:00:00Z"
+}
