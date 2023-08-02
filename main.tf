@@ -45,3 +45,7 @@ data "azurerm_key_vault" "bootstrap_kv" {
   name                = "${local.bootstrap_prefix}-kv-${var.env}"
   resource_group_name = "${local.bootstrap_prefix}-${var.env}-rg"
 }
+
+data "azuread_service_principal" "sds_apim_sp" {
+  display_name = "sds-api-mgmt-${var.env}"
+}
