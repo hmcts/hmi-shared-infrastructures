@@ -46,7 +46,6 @@ data "azurerm_key_vault" "bootstrap_kv" {
   resource_group_name = "${local.bootstrap_prefix}-${var.env}-rg"
 }
 
-data "azurerm_user_assigned_identity" "sds_apim_sp" {
-  name = "sds-api-mgmt-${var.env}"
-  resource_group_name = "ss-${var.env}-network-rg"
+data "azuread_service_principal" "sds_apim_sp" {
+  display_name = "sds-api-mgmt-${var.env}"
 }
