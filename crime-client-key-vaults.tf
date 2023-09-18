@@ -1,19 +1,19 @@
 locals {
   crime_bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
-  crime_key_vault_name = "${var.product}-kv-${var.env}-shared-crime"
+  crime_key_vault_name    = "${var.product}-kv-${var.env}-shared-crime"
 }
 
 # KV for Crime to access secrets needed to authenticate with HMI 
 module "kv_crime" {
-  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = local.crime_key_vault_name
-  product                     = var.product
-  env                         = var.env
-  object_id                   = var.jenkins_identity_object_id
-  resource_group_name         = data.azurerm_resource_group.rg.name
-  product_group_name          = var.active_directory_group
-  common_tags                 = var.common_tags
-  create_managed_identity     = false
+  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  name                    = local.crime_key_vault_name
+  product                 = var.product
+  env                     = var.env
+  object_id               = var.jenkins_identity_object_id
+  resource_group_name     = data.azurerm_resource_group.rg.name
+  product_group_name      = var.active_directory_group
+  common_tags             = var.common_tags
+  create_managed_identity = false
 }
 
 data "azurerm_key_vault_secret" "crime_bootstrap_secrets" {

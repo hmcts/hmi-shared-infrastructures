@@ -1,2 +1,2 @@
-env = "demo"
+env                    = "demo"
 jenkins_mi_resource_id = "/subscriptions/6c4d2513-a873-41b4-afdd-b05a33206631/resourceGroups/managed-identities-ptl-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/jenkins-ptl-mi"

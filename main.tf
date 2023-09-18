@@ -1,7 +1,7 @@
 locals {
-  prefix = "${var.product}-sharedinfra"
-  resource_group_name  = "${local.prefix}-${var.env}-rg"
-  bootstrap_prefix = "${var.product}-bootstrap"
+  prefix              = "${var.product}-sharedinfra"
+  resource_group_name = "${local.prefix}-${var.env}-rg"
+  bootstrap_prefix    = "${var.product}-bootstrap"
 
   sas_tokens = {
     "rota-rl" = {
@@ -9,7 +9,7 @@ locals {
       storage_account = "${var.product}sa${var.env}"
       container       = "rota"
       expiry_days     = 240
-      remaining_days = 60
+      remaining_days  = 60
     }
 
     "rota-rlw" = {
@@ -17,7 +17,7 @@ locals {
       storage_account = "${var.product}sa${var.env}"
       container       = "rota"
       expiry_days     = 240
-      remaining_days = 60
+      remaining_days  = 60
     }
   }
 }
@@ -35,7 +35,7 @@ data "azurerm_user_assigned_identity" "hmi" {
 }
 
 resource "azurerm_role_assignment" "mi_sa" {
-  for_each     = toset( ["Contributor", "Storage Blob Data Contributor"] )
+  for_each             = toset(["Contributor", "Storage Blob Data Contributor"])
   scope                = module.sa.storageaccount_id
   role_definition_name = each.key
   principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id

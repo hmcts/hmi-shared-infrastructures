@@ -5,17 +5,17 @@ module "automation_runbook_sas_token_renewal" {
 
   name = "rotate-sas-tokens-${each.value.storage_account}-${each.value.container}-${each.value.permissions}"
 
-  resource_group_name              = data.azurerm_resource_group.rg.name
-  environment                      = var.env
-  storage_account_name             = each.value.storage_account
-  container_name                   = each.value.container
-  key_vault_name                   = module.kv_rota.key_vault_name
-  secret_name                      = "rota-sas-${each.value.container}-${each.value.permissions}"
-  expiry_days                      = each.value.expiry_days
-  remaining_days                   = each.value.remaining_days
+  resource_group_name  = data.azurerm_resource_group.rg.name
+  environment          = var.env
+  storage_account_name = each.value.storage_account
+  container_name       = each.value.container
+  key_vault_name       = module.kv_rota.key_vault_name
+  secret_name          = "rota-sas-${each.value.container}-${each.value.permissions}"
+  expiry_days          = each.value.expiry_days
+  remaining_days       = each.value.remaining_days
 
-  automation_account_name          = azurerm_automation_account.automation_account.name
-  sas_permissions                  = each.value.permissions
+  automation_account_name = azurerm_automation_account.automation_account.name
+  sas_permissions         = each.value.permissions
 
   user_assigned_identity_client_id = data.azurerm_user_assigned_identity.hmi.principal_id
 
