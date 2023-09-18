@@ -1,19 +1,19 @@
 locals {
   snl_bootstrap_secrets = ["hmi-snl-client-id", "hmi-snl-client-pwd"]
-  snl_key_vault_name = "${var.product}-kv-${var.env}-shared-snl"
+  snl_key_vault_name    = "${var.product}-kv-${var.env}-shared-snl"
 }
 
 # KV for SNL to access secrets needed to authenticate with HMI 
 module "kv_snl" {
-  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = local.snl_key_vault_name
-  product                     = var.product
-  env                         = var.env
-  object_id                   = var.jenkins_identity_object_id
-  resource_group_name         = data.azurerm_resource_group.rg.name
-  product_group_name          = var.active_directory_group
-  common_tags                 = var.common_tags
-  create_managed_identity     = false
+  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  name                    = local.snl_key_vault_name
+  product                 = var.product
+  env                     = var.env
+  object_id               = var.jenkins_identity_object_id
+  resource_group_name     = data.azurerm_resource_group.rg.name
+  product_group_name      = var.active_directory_group
+  common_tags             = var.common_tags
+  create_managed_identity = false
 }
 
 data "azurerm_key_vault_secret" "snl_bootstrap_secrets" {

@@ -1,19 +1,19 @@
 locals {
   cft_bootstrap_secrets = ["hmi-cft-client-id", "hmi-cft-client-pwd"]
-  cft_key_vault_name = "${var.product}-kv-${var.env}-shared-cft"
+  cft_key_vault_name    = "${var.product}-kv-${var.env}-shared-cft"
 }
 
 # KV for CFT to access secrets needed to authenticate with HMI 
 module "kv_cft" {
-  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  name                        = local.cft_key_vault_name
-  product                     = var.product
-  env                         = var.env
-  object_id                   = var.jenkins_identity_object_id
-  resource_group_name         = data.azurerm_resource_group.rg.name
-  product_group_name          = var.active_directory_group
-  common_tags                 = var.common_tags
-  create_managed_identity     = false
+  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  name                    = local.cft_key_vault_name
+  product                 = var.product
+  env                     = var.env
+  object_id               = var.jenkins_identity_object_id
+  resource_group_name     = data.azurerm_resource_group.rg.name
+  product_group_name      = var.active_directory_group
+  common_tags             = var.common_tags
+  create_managed_identity = false
 }
 
 data "azurerm_key_vault_secret" "cft_bootstrap_secrets" {

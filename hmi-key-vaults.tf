@@ -1,11 +1,11 @@
 locals {
-  hmi_bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-dtu-id", 
-  "hmi-dtu-pwd", "sn-assignment-group", "sn-caller-id", "sn-password", "sn-role-type", 
-  "sn-service-offering", "sn-url", "sn-username", "vh-client-id", "vh-client-pwd", 
-  "snl-client-id", "snl-client-pwd", "pip-client-id", "pip-client-pwd", "pip-client-scope", "cft-client-id", 
-  "cft-client-pwd", "hmi-servicenow-auth", "crime-apim-cert",
-  "elinks-client-token", "pip-client-host", "vh-client-host", "vh-OAuth-url", "hmi-servicenow-host", 
-  "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host", 
+  hmi_bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-dtu-id",
+    "hmi-dtu-pwd", "sn-assignment-group", "sn-caller-id", "sn-password", "sn-role-type",
+    "sn-service-offering", "sn-url", "sn-username", "vh-client-id", "vh-client-pwd",
+    "snl-client-id", "snl-client-pwd", "pip-client-id", "pip-client-pwd", "pip-client-scope", "cft-client-id",
+    "cft-client-pwd", "hmi-servicenow-auth", "crime-apim-cert",
+    "elinks-client-token", "pip-client-host", "vh-client-host", "vh-OAuth-url", "hmi-servicenow-host",
+    "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host",
   "crime-client-host", "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx", "cft-OAuth-url"]
   hmi_key_vault_name = "${var.product}-kv-${var.env}"
 }

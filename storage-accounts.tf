@@ -37,10 +37,10 @@ module "sa" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = var.location
 
-  account_tier                    = var.sa_account_tier
-  account_kind                    = var.sa_account_kind
-  account_replication_type        = var.sa_account_replication_type
-  access_tier                     = var.sa_access_tier
+  account_tier             = var.sa_account_tier
+  account_kind             = var.sa_account_kind
+  account_replication_type = var.sa_account_replication_type
+  access_tier              = var.sa_access_tier
 
   enable_data_protection = true
 
