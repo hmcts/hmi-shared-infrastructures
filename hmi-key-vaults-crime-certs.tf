@@ -10,7 +10,7 @@ data "azurerm_key_vault_certificate" "crime_bootstrap_cert" {
 
 data "azurerm_key_vault_secret" "crime_bootstrap_cert_password" {
   name         = local.crime_cert_kv_password_name
-  key_vault_id = module.kv_hmi.key_vault_id
+  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
 }
 
 resource "azurerm_key_vault_certificate" "import_crime_cert" {
