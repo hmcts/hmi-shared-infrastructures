@@ -19,6 +19,6 @@ resource "azurerm_key_vault_certificate" "import_crime_cert" {
 
   certificate {
     contents = data.azurerm_key_vault_certificate.crime_bootstrap_cert.certificate_contents
-    password             = data.azurerm_key_vault_secret.crime_bootstrap_cert_password.value
+    password = data.azurerm_key_vault_secret.crime_bootstrap_cert_password.value
   }
 }
