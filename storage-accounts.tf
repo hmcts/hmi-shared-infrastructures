@@ -44,13 +44,11 @@ module "sa" {
 
   enable_data_protection = true
 
-  team_name    = var.team_name
-  team_contact = var.team_contact
-
   containers = local.containers
 
   managed_identity_object_id = data.azurerm_user_assigned_identity.keda.principal_id
   role_assignments = [
     "Storage Blob Data Reader"
   ]
+  pim_roles = {}
 }

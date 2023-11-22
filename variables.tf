@@ -1,9 +1,3 @@
-variable "team_name" {
-  default = "HMI"
-}
-variable "team_contact" {
-  default = "#pip-devs"
-}
 variable "common_tags" {
   type = map(string)
 }
