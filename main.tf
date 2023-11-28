@@ -1,5 +1,5 @@
 locals {
-  prefix              = "${var.product}-sharedinfra"
+  prefix              = "${var.product}-sharedinfra-sds"
   resource_group_name = "${local.prefix}-${var.env}-rg"
   bootstrap_prefix    = "${var.product}-bootstrap"
 
@@ -22,9 +22,9 @@ locals {
   }
 }
 
-# Needs to be a resource when current repo is deleted.
-data "azurerm_resource_group" "rg" {
-  name = local.resource_group_name
+resource "azurerm_resource_group" "rg" {
+  name     = local.resource_group_name
+  location = var.location
 }
 
 data "azurerm_client_config" "current" {}
