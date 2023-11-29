@@ -20,7 +20,7 @@ module "kv_hmi" {
   product_group_name          = var.active_directory_group
   common_tags                 = var.common_tags
   create_managed_identity     = false
-  managed_identity_object_ids = [data.azurerm_user_assigned_identity.hmi.principal_id]
+  managed_identity_object_ids = [azurerm_user_assigned_identity.hmi-sds-mi.principal_id]
 }
 
 module "keyvault_secrets" {
@@ -59,7 +59,7 @@ module "keyvault_secrets" {
     },
     {
       name         = "mi-id"
-      value        = data.azurerm_user_assigned_identity.hmi.client_id
+      value        = azurerm_user_assigned_identity.hmi-sds-mi.client_id
       tags         = {}
       content_type = ""
     }
