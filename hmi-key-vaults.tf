@@ -29,18 +29,18 @@ module "keyvault_secrets" {
   key_vault_id = module.kv_hmi.key_vault_id
   tags         = var.common_tags
   secrets = [
-    # {
-    #   name         = "sa-connection-string"
-    #   value        = module.sa.storageaccount_primary_connection_string
-    #   tags         = {}
-    #   content_type = ""
-    # },
-    # {
-    #   name         = "sa-name"
-    #   value        = module.sa.storageaccount_name
-    #   tags         = {}
-    #   content_type = ""
-    # },
+    {
+      name         = "sa-connection-string"
+      value        = module.sa.storageaccount_primary_connection_string
+      tags         = {}
+      content_type = ""
+    },
+    {
+      name         = "sa-name"
+      value        = module.sa.storageaccount_name
+      tags         = {}
+      content_type = ""
+    },
     {
       name  = "app-insights-rota-dtu-connection-string"
       value = azurerm_application_insights.rota_dtu_app_insights.connection_string

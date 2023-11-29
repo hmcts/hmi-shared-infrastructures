@@ -34,12 +34,12 @@ data "azurerm_user_assigned_identity" "hmi" {
   resource_group_name = "managed-identities-${var.env}-rg"
 }
 
-# resource "azurerm_role_assignment" "mi_sa" {
-#   for_each             = toset(["Contributor", "Storage Blob Data Contributor"])
-#   scope                = module.sa.storageaccount_id
-#   role_definition_name = each.key
-#   principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id
-# }
+resource "azurerm_role_assignment" "mi_sa" {
+  for_each             = toset(["Contributor", "Storage Blob Data Contributor"])
+  scope                = module.sa.storageaccount_id
+  role_definition_name = each.key
+  principal_id         = data.azurerm_user_assigned_identity.hmi.principal_id
+}
 
 data "azurerm_key_vault" "bootstrap_kv" {
   name                = "${local.bootstrap_prefix}-kv-${var.env}"
