@@ -59,7 +59,7 @@ module "keyvault_secrets" {
     },
     {
       name         = "mi-id"
-      value        = azurerm_user_assigned_identity.hmi.client_id
+      value        = data.azurerm_user_assigned_identity.hmi.client_id
       tags         = {}
       content_type = ""
     }
