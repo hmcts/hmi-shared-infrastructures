@@ -50,14 +50,6 @@ module "keyvault_secrets" {
       content_type = ""
     },
     {
-      name  = "app-insights-libra-dtu-connection-string"
-      value = azurerm_application_insights.libra_dtu_app_insights.connection_string
-      tags = {
-        "source" = "App Insights"
-      }
-      content_type = ""
-    },
-    {
       name         = "mi-id"
       value        = azurerm_user_assigned_identity.hmi-sds-mi.client_id
       tags         = {}
