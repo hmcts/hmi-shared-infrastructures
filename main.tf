@@ -29,7 +29,12 @@ resource "azurerm_resource_group" "rg" {
 
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_user_assigned_identity" "hmi" {
+data "azurerm_user_assigned_identity" "hmi" {
+  name                = "hmi-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
+}
+
+resource "azurerm_user_assigned_identity" "hmi-sds-mi" {
   name                = "hmi-sds-${var.env}-mi"
   resource_group_name = "managed-identities-${var.env}-rg"
   location            = var.location
