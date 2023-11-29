@@ -34,7 +34,7 @@ module "snl_keyvault_bootstrap_secrets" {
       tags = {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
-      content_type    = ""
+      content_type = ""
     }
   ]
   depends_on = [

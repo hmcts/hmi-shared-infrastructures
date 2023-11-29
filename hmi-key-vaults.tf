@@ -30,16 +30,16 @@ module "keyvault_secrets" {
   tags         = var.common_tags
   secrets = [
     {
-      name            = "sa-connection-string"
-      value           = module.sa.storageaccount_primary_connection_string
-      tags            = {}
-      content_type    = ""
+      name         = "sa-connection-string"
+      value        = module.sa.storageaccount_primary_connection_string
+      tags         = {}
+      content_type = ""
     },
     {
-      name            = "sa-name"
-      value           = module.sa.storageaccount_name
-      tags            = {}
-      content_type    = ""
+      name         = "sa-name"
+      value        = module.sa.storageaccount_name
+      tags         = {}
+      content_type = ""
     },
     {
       name  = "app-insights-rota-dtu-connection-string"
@@ -47,7 +47,7 @@ module "keyvault_secrets" {
       tags = {
         "source" = "App Insights"
       }
-      content_type    = ""
+      content_type = ""
     },
     {
       name  = "app-insights-libra-dtu-connection-string"
@@ -55,13 +55,13 @@ module "keyvault_secrets" {
       tags = {
         "source" = "App Insights"
       }
-      content_type    = ""
+      content_type = ""
     },
     {
-      name            = "mi-id"
-      value           = data.azurerm_user_assigned_identity.hmi.client_id
-      tags            = {}
-      content_type    = ""
+      name         = "mi-id"
+      value        = data.azurerm_user_assigned_identity.hmi.client_id
+      tags         = {}
+      content_type = ""
     }
   ]
 
@@ -88,7 +88,7 @@ module "hmi_keyvault_bootstrap_secrets" {
       tags = {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
-      content_type    = ""
+      content_type = ""
     }
   ]
   depends_on = [
