@@ -52,3 +52,8 @@ data "azurerm_key_vault" "bootstrap_kv" {
 data "azuread_service_principal" "sds_apim_sp" {
   display_name = "sds-api-mgmt-${var.env}"
 }
+
+data "azurerm_user_assigned_identity" "hmi" {
+  name                = "hmi-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
+}
