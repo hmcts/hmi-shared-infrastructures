@@ -38,6 +38,7 @@ resource "azurerm_user_assigned_identity" "hmi-sds-mi" {
   name                = "hmi-sds-${var.env}-mi"
   resource_group_name = "managed-identities-${var.env}-rg"
   location            = var.location
+  tags                = var.common_tags
 }
 
 resource "azurerm_role_assignment" "mi_sa" {
