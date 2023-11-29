@@ -21,6 +21,8 @@ module "kv_hmi" {
   common_tags                 = var.common_tags
   create_managed_identity     = false
   managed_identity_object_ids = [azurerm_user_assigned_identity.hmi-sds-mi.principal_id]
+
+  depends_on = [azurerm_user_assigned_identity.hmi-sds-mi]
 }
 
 module "keyvault_secrets" {
@@ -44,14 +46,6 @@ module "keyvault_secrets" {
     {
       name  = "app-insights-rota-dtu-connection-string"
       value = azurerm_application_insights.rota_dtu_app_insights.connection_string
-      tags = {
-        "source" = "App Insights"
-      }
-      content_type = ""
-    },
-    {
-      name  = "app-insights-libra-dtu-connection-string"
-      value = azurerm_application_insights.libra_dtu_app_insights.connection_string
       tags = {
         "source" = "App Insights"
       }

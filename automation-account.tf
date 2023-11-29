@@ -11,6 +11,10 @@ resource "azurerm_automation_account" "automation_account" {
       var.jenkins_mi_resource_id
     ]
   }
-
   tags = var.common_tags
+
+  depends_on = [
+    azurerm_user_assigned_identity.hmi-sds-mi,
+    module.sa
+  ]
 }
