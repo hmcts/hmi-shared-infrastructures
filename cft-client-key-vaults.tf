@@ -1,6 +1,6 @@
 locals {
   cft_bootstrap_secrets = ["hmi-cft-client-id", "hmi-cft-client-pwd"]
-  cft_key_vault_name    = "${var.product}-sds-kv-${var.env}-shared-cft"
+  cft_key_vault_name    = "${var.product}-sds-kv-${var.env}-cft"
 }
 
 # KV for CFT to access secrets needed to authenticate with HMI 

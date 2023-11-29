@@ -1,6 +1,6 @@
 locals {
   crime_bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
-  crime_key_vault_name    = "${var.product}-sds-kv-${var.env}-shared-crime"
+  crime_key_vault_name    = "${var.product}-sds-kv-${var.env}-crime"
 }
 
 # KV for Crime to access secrets needed to authenticate with HMI 
