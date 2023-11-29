@@ -41,6 +41,7 @@ resource "azurerm_role_assignment" "mi_sa" {
   scope                = module.sa.storageaccount_id
   role_definition_name = each.key
   principal_id         = azurerm_user_assigned_identity.hmi-sds-mi.principal_id
+  depends_on = [azurerm_user_assigned_identity.hmi-sds-mi]
 }
 
 data "azurerm_key_vault" "bootstrap_kv" {
