@@ -7,7 +7,7 @@ locals {
     "elinks-client-token", "pip-client-host", "vh-client-host", "vh-OAuth-url", "hmi-servicenow-host",
     "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host",
   "crime-client-host", "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx", "cft-OAuth-url", "hmi-crime-cert-password", "hmi-crime-cert-base-64"]
-  hmi_key_vault_name = "${var.product}-kv-${var.env}"
+  hmi_key_vault_name = "${var.product}-sds-kv-${var.env}"
 }
 
 module "kv_hmi" {

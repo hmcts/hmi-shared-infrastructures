@@ -1,6 +1,6 @@
 locals {
   snl_bootstrap_secrets = ["hmi-snl-client-id", "hmi-snl-client-pwd"]
-  snl_key_vault_name    = "${var.product}-kv-${var.env}-shared-snl"
+  snl_key_vault_name    = "${var.product}-sds-kv-${var.env}-shared-snl"
 }
 
 # KV for SNL to access secrets needed to authenticate with HMI 

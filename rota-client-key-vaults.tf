@@ -1,5 +1,5 @@
 locals {
-  rota_key_vault_name = "${var.product}-kv-${var.env}-shared-rota"
+  rota_key_vault_name = "${var.product}-sds-kv-${var.env}-shared-rota"
 }
 
 # KV for rota to access secrets needed to authenticate with HMI
