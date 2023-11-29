@@ -7,7 +7,7 @@ resource "azurerm_automation_account" "automation_account" {
   identity {
     type = "SystemAssigned, UserAssigned"
     identity_ids = [
-      data.azurerm_user_assigned_identity.hmi.id,
+      azurerm_user_assigned_identity.hmi.id,
       var.jenkins_mi_resource_id
     ]
   }
