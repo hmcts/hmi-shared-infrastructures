@@ -35,7 +35,6 @@ module "crime_keyvault_bootstrap_secrets" {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
       content_type    = ""
-      expiration_date = var.secret_expiry
     }
   ]
   depends_on = [
