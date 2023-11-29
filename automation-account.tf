@@ -14,7 +14,7 @@ resource "azurerm_automation_account" "automation_account" {
   tags = var.common_tags
 
   depends_on = [
-    azurerm_user_assigned_identity.hmi-sds-mi
+    azurerm_user_assigned_identity.hmi-sds-mi,
     module.sa
   ]
 }
