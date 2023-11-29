@@ -46,7 +46,7 @@ module "sa" {
 
   containers = local.containers
 
-  managed_identity_object_id = data.azurerm_user_assigned_identity.keda.principal_id
+  managed_identity_object_id = azurerm_user_assigned_identity.keda.principal_id
   role_assignments = [
     "Storage Blob Data Reader"
   ]
