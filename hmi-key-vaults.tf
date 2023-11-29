@@ -7,7 +7,7 @@ locals {
     "elinks-client-token", "pip-client-host", "vh-client-host", "vh-OAuth-url", "hmi-servicenow-host",
     "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host",
   "crime-client-host", "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx", "cft-OAuth-url", "hmi-crime-cert-password", "hmi-crime-cert-base-64"]
-  hmi_key_vault_name = "${var.product}-kv-${var.env}"
+  hmi_key_vault_name = "${var.product}-sds-kv-${var.env}"
 }
 
 module "kv_hmi" {
@@ -30,18 +30,16 @@ module "keyvault_secrets" {
   tags         = var.common_tags
   secrets = [
     {
-      name            = "sa-connection-string"
-      value           = module.sa.storageaccount_primary_connection_string
-      tags            = {}
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      name         = "sa-connection-string"
+      value        = module.sa.storageaccount_primary_connection_string
+      tags         = {}
+      content_type = ""
     },
     {
-      name            = "sa-name"
-      value           = module.sa.storageaccount_name
-      tags            = {}
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      name         = "sa-name"
+      value        = module.sa.storageaccount_name
+      tags         = {}
+      content_type = ""
     },
     {
       name  = "app-insights-rota-dtu-connection-string"
@@ -49,8 +47,7 @@ module "keyvault_secrets" {
       tags = {
         "source" = "App Insights"
       }
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      content_type = ""
     },
     {
       name  = "app-insights-libra-dtu-connection-string"
@@ -58,15 +55,13 @@ module "keyvault_secrets" {
       tags = {
         "source" = "App Insights"
       }
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      content_type = ""
     },
     {
-      name            = "mi-id"
-      value           = data.azurerm_user_assigned_identity.hmi.client_id
-      tags            = {}
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      name         = "mi-id"
+      value        = data.azurerm_user_assigned_identity.hmi.client_id
+      tags         = {}
+      content_type = ""
     }
   ]
 
@@ -93,8 +88,7 @@ module "hmi_keyvault_bootstrap_secrets" {
       tags = {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      content_type = ""
     }
   ]
   depends_on = [

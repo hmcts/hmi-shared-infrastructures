@@ -1,6 +1,6 @@
 locals {
   cft_bootstrap_secrets = ["hmi-cft-client-id", "hmi-cft-client-pwd"]
-  cft_key_vault_name    = "${var.product}-kv-${var.env}-shared-cft"
+  cft_key_vault_name    = "${var.product}-sds-kv-${var.env}-cft"
 }
 
 # KV for CFT to access secrets needed to authenticate with HMI 
@@ -34,8 +34,7 @@ module "cft_keyvault_bootstrap_secrets" {
       tags = {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      content_type = ""
     }
   ]
   depends_on = [

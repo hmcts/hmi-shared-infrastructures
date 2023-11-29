@@ -1,6 +1,6 @@
 locals {
   crime_bootstrap_secrets = ["hmi-crime-client-id", "hmi-crime-client-pwd"]
-  crime_key_vault_name    = "${var.product}-kv-${var.env}-shared-crime"
+  crime_key_vault_name    = "${var.product}-sds-kv-${var.env}-crime"
 }
 
 # KV for Crime to access secrets needed to authenticate with HMI 
@@ -34,8 +34,7 @@ module "crime_keyvault_bootstrap_secrets" {
       tags = {
         "source" : "bootstrap ${data.azurerm_key_vault.bootstrap_kv.name} secrets"
       }
-      content_type    = ""
-      expiration_date = var.secret_expiry
+      content_type = ""
     }
   ]
   depends_on = [
