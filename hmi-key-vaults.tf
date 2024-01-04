@@ -45,7 +45,7 @@ module "keyvault_secrets" {
     },
     {
       name  = "app-insights-rota-dtu-connection-string"
-      value = azurerm_application_insights.rota_dtu_app_insights.connection_string
+      value = module.application_insights.connection_string
       tags = {
         "source" = "App Insights"
       }
