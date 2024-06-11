@@ -4,7 +4,7 @@ This repository contains the shared common infrastructure per environment for HM
 
 - Azure Key Vault
 - Azure Storage Account
-- Azure APIM Certificate.
+- Azure APIM Certificate
 
 ### Azure Key Vault
 Azure keyvault contains different keyvaults. There is one keyvault which will contains all the secrets which are being used by HMI SDS APIM. It also contains SAS tokens which are being used by ROTA.
