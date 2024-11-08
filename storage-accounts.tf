@@ -19,7 +19,7 @@ data "azurerm_user_assigned_identity" "keda" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "sa" {
-  source = "git@github.com:hmcts/cnp-module-storage-account?ref=master"
+  source = "git@github.com:hmcts/cnp-module-storage-account?ref=4.x"
 
   env = var.env
 
