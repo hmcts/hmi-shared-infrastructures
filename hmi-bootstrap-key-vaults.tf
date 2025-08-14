@@ -21,37 +21,4 @@ module "kv_hmi_boostrap" {
   create_managed_identity = false
 }
 
-# All of the below can be removed once it is merged and run in master and all envs, as the import only needs to be run once.
-data "azurerm_subscription" "current" {}
-
-import {
-  to = module.kv_hmi_boostrap.azurerm_key_vault.kv
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.bootstrap_resource_group_name}/providers/Microsoft.KeyVault/vaults/${local.bootstrap_key_vault_name}"
-}
-
-import {
-  to = azurerm_resource_group.bootstrap_rg
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.bootstrap_resource_group_name}"
-}
-
-import {
-  to = module.kv_hmi_boostrap.azurerm_monitor_diagnostic_setting.kv-ds
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.bootstrap_resource_group_name}/providers/Microsoft.KeyVault/vaults/${local.bootstrap_key_vault_name}|${local.bootstrap_key_vault_name}"
-}
-
-import {
-  to = module.kv_hmi_boostrap.azurerm_key_vault_access_policy.creator_access_policy
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.bootstrap_resource_group_name}/providers/Microsoft.KeyVault/vaults/${local.bootstrap_key_vault_name}/objectId/${var.jenkins_identity_object_id}"
-}
-
-import {
-  to = module.kv_hmi_boostrap.azurerm_key_vault_access_policy.product_team_access_policy
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.bootstrap_resource_group_name}/providers/Microsoft.KeyVault/vaults/${local.bootstrap_key_vault_name}/objectId/7bde62e7-b39f-487c-95c9-b4c794fdbb96"
-}
-
-import {
-  for_each = var.env == "prod" ? toset([]) : toset(["b2a1773c-a5ae-48b5-b5fa-95b0e05eee05"])
-  to       = module.kv_hmi_boostrap.azurerm_key_vault_access_policy.developer[0]
-  id       = "${data.azurerm_subscription.current.id}/resourceGroups/${local.bootstrap_resource_group_name}/providers/Microsoft.KeyVault/vaults/${local.bootstrap_key_vault_name}/objectId/${each.key}"
-}
 
