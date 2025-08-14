@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "bootstrap_rg" {
   tags     = var.common_tags
 }
 
-module "kv_hmi" {
+module "kv_hmi_boostrap" {
   source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
   name                    = local.bootstrap_key_vault_name
   product                 = var.product
