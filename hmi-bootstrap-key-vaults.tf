@@ -18,7 +18,7 @@ module "kv_hmi_boostrap" {
   resource_group_name     = resource.azurerm_resource_group.bootstrap_rg.name
   product_group_name      = var.active_directory_group
   common_tags             = var.common_tags
-  create_managed_identity = true
+  create_managed_identity = false
 }
 
 # All of the below can be removed once it is merged and run in master and all envs, as the import only needs to be run once.
