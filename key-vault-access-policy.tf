@@ -33,5 +33,5 @@ resource "azurerm_key_vault_access_policy" "cft_jenkins_access" {
 
   certificate_permissions = []
   key_permissions         = []
-  secret_permissions = ["Get"]
+  secret_permissions      = ["Get"]
 }
