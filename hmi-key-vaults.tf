@@ -1,12 +1,13 @@
 locals {
-  hmi_bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope", "hmi-dtu-id",
-    "hmi-dtu-pwd", "sn-assignment-group", "sn-caller-id", "sn-password", "sn-role-type",
-    "sn-service-offering", "sn-url", "sn-username",
-    "snl-client-id", "snl-client-pwd", "pip-client-id", "pip-client-pwd", "pip-client-scope", "cft-client-id",
-    "cft-client-pwd", "hmi-servicenow-auth", "crime-apim-cert",
-    "elinks-client-token", "pip-client-host", "hmi-servicenow-host",
-    "snl-OAuth-url", "snl-client-host", "elinks-client-host", "cft-client-host",
-  "crime-client-host", "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx", "cft-OAuth-url", "hmi-crime-cert-password", "hmi-crime-cert-base-64"]
+  hmi_bootstrap_secrets = ["hmi-url", "tenant-id", "hmi-gateway-scope",
+    "snl-client-id", "snl-client-pwd",
+    "pip-client-id", "pip-client-pwd", "pip-client-scope", "pip-client-host",
+    "cft-client-id", "cft-client-pwd",
+    "elinks-client-token",
+    "snl-OAuth-url", "snl-client-host",
+    "elinks-client-host",
+    "cft-client-host", "cft-OAuth-url",
+  "health-check-url", "hmi-emulator-host", "hmi-emulator-ctx"]
   hmi_key_vault_name = "${var.product}-sds-kv-${var.env}"
 }
 
@@ -41,14 +42,6 @@ module "keyvault_secrets" {
       name         = "sa-name"
       value        = module.sa.storageaccount_name
       tags         = {}
-      content_type = ""
-    },
-    {
-      name  = "app-insights-rota-dtu-connection-string"
-      value = module.application_insights.connection_string
-      tags = {
-        "source" = "App Insights"
-      }
       content_type = ""
     },
     {

@@ -2,24 +2,6 @@ locals {
   prefix              = "${var.product}-sharedinfra-sds"
   resource_group_name = "${local.prefix}-${var.env}-rg"
   bootstrap_prefix    = "${var.product}-bootstrap"
-
-  sas_tokens = {
-    "rota-rl" = {
-      permissions     = "rl"
-      storage_account = "${var.product}sa${var.env}"
-      container       = "rota"
-      expiry_days     = 240
-      remaining_days  = 60
-    }
-
-    "rota-rlw" = {
-      permissions     = "rlw"
-      storage_account = "${var.product}sa${var.env}"
-      container       = "rota"
-      expiry_days     = 240
-      remaining_days  = 60
-    }
-  }
 }
 
 resource "azurerm_resource_group" "rg" {
