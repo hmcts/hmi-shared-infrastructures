@@ -18,14 +18,6 @@ resource "azurerm_user_assigned_identity" "hmi-sds-mi" {
   tags                = var.common_tags
 }
 
-resource "azurerm_role_assignment" "mi_sa" {
-  for_each             = toset(["Contributor", "Storage Blob Data Contributor"])
-  scope                = module.sa.storageaccount_id
-  role_definition_name = each.key
-  principal_id         = azurerm_user_assigned_identity.hmi-sds-mi.principal_id
-  depends_on           = [azurerm_user_assigned_identity.hmi-sds-mi]
-}
-
 data "azurerm_key_vault" "bootstrap_kv" {
   name                = "${local.bootstrap_prefix}-kv-${var.env}"
   resource_group_name = "${local.bootstrap_prefix}-${var.env}-rg"
