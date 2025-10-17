@@ -33,18 +33,6 @@ module "keyvault_secrets" {
   tags         = var.common_tags
   secrets = [
     {
-      name         = "sa-connection-string"
-      value        = module.sa.storageaccount_primary_connection_string
-      tags         = {}
-      content_type = ""
-    },
-    {
-      name         = "sa-name"
-      value        = module.sa.storageaccount_name
-      tags         = {}
-      content_type = ""
-    },
-    {
       name         = "mi-id"
       value        = azurerm_user_assigned_identity.hmi-sds-mi.client_id
       tags         = {}
