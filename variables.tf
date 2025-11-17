@@ -8,23 +8,6 @@ variable "location" {
   default = "UK South"
 }
 variable "env" {}
-
-variable "sa_access_tier" {
-  type    = string
-  default = "Cool"
-}
-variable "sa_account_kind" {
-  type    = string
-  default = "StorageV2"
-}
-variable "sa_account_tier" {
-  type    = string
-  default = "Standard"
-}
-variable "sa_account_replication_type" {
-  type    = string
-  default = "RAGRS"
-}
 variable "active_directory_group" {
   type        = string
   description = "Active Directory Group Name"
