@@ -11,6 +11,11 @@ locals {
   hmi_key_vault_name = "${var.product}-sds-kv-${var.env}"
 }
 
+data "azurerm_user_assigned_identity" "jenkins" {
+  name                = "jenkins-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
+}
+
 module "kv_hmi" {
   source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
   name                        = local.hmi_key_vault_name
@@ -22,6 +27,7 @@ module "kv_hmi" {
   common_tags                 = var.common_tags
   create_managed_identity     = false
   managed_identity_object_ids = [azurerm_user_assigned_identity.hmi-sds-mi.principal_id]
+  jenkins_object_id           = data.azurerm_user_assigned_identity.jenkins.principal_id
 
   depends_on = [azurerm_user_assigned_identity.hmi-sds-mi]
 }
