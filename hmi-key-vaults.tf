@@ -27,7 +27,7 @@ module "kv_hmi" {
   common_tags                 = var.common_tags
   create_managed_identity     = false
   managed_identity_object_ids = [azurerm_user_assigned_identity.hmi-sds-mi.principal_id]
-  jenkins_object_id       = data.azurerm_user_assigned_identity.jenkins.principal_id
+  jenkins_object_id           = data.azurerm_user_assigned_identity.jenkins.principal_id
 
   depends_on = [azurerm_user_assigned_identity.hmi-sds-mi]
 }
