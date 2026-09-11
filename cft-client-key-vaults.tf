@@ -5,7 +5,7 @@ locals {
 
 # KV for CFT to access secrets needed to authenticate with HMI 
 module "kv_cft" {
-  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-31965/remove-jenkins-ptl-access"
   name                    = local.cft_key_vault_name
   product                 = var.product
   env                     = var.env
