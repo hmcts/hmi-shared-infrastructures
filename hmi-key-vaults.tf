@@ -17,7 +17,7 @@ data "azurerm_user_assigned_identity" "jenkins" {
 }
 
 module "kv_hmi" {
-  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-31965/remove-jenkins-ptl-access"
   name                        = local.hmi_key_vault_name
   product                     = var.product
   env                         = var.env
