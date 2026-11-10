@@ -19,7 +19,7 @@ jobs:
         uses: dflook/terraform-fmt@90fc9225b4c109d9a6bb0b2ca0faa89490c0ba95 # v2.2.3
 
       - name: commit format changes to branch
-        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           commit_message: Automated Change
           commit_user_name: Terraform format GitHub Actions Bot
